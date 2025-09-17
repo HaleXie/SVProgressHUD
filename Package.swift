@@ -32,12 +32,13 @@ let package = Package(
                 "SVRadialGradientLayer.m"
             ],
             resources: [
-                .copy("SVProgressHUD.bundle"),
+                .process("SVProgressHUD.bundle"),
                 .copy("PrivacyInfo.xcprivacy")
             ],
             publicHeadersPath: "include",
             cSettings: [
                 .headerSearchPath("include"),
+                .define("SVProgressHUD_SPM", to: "1"),
                 .define("SV_APP_EXTENSIONS", .when(platforms: [.iOS, .visionOS])),
                 .unsafeFlags(["-fmodules"], .when(platforms: [.iOS, .visionOS]))
             ],
