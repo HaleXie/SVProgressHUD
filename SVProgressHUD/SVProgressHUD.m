@@ -665,7 +665,11 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     if (self.viewForExtension) {
         self.frame = self.viewForExtension.frame;
     } else {
+#if TARGET_OS_VISION
+        self.frame = CGRectMake(0, 0, 1920, 1080);
+#else
         self.frame = UIScreen.mainScreen.bounds;
+#endif
     }
 #if TARGET_OS_IOS
     UIInterfaceOrientation orientation = CGRectGetWidth(self.frame) > CGRectGetHeight(self.frame) ? UIInterfaceOrientationLandscapeLeft : UIInterfaceOrientationPortrait;
@@ -1220,7 +1224,11 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     CGRect windowBounds = [[[UIApplication sharedApplication] delegate] window].bounds;
     _controlView.frame = windowBounds;
 #else
+#if TARGET_OS_VISION
+    _controlView.frame = CGRectMake(0, 0, 1920, 1080);
+#else
     _controlView.frame = [UIScreen mainScreen].bounds;
+#endif
 #endif
     
     return _controlView;
